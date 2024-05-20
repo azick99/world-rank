@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,10 +19,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className=" w-full h-[19rem] bg-no-repeat bg-contain brightness-125  flex items-center justify-center relative">
-          <img
+          <Image
             src="/hero-image-wr.jpg"
             alt="logo"
-            className="absolute  w-full h-full object-cover -z-30"
+            className="absolute h-full -z-30"
+            layout="fill"
+            objectFit="cover"
           />
           <Image
             src="/logo.svg"

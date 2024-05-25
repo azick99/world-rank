@@ -1,11 +1,41 @@
-import { z } from 'zod'
+import { object, string, z, array, optional, number, record } from 'zod'
 
-export const CoutriesResults = z.object({
-  countries: z.array(z.object({ name: z.object({ common: z.string() }) })),
+const countryContent = {
+  name: object({ common: string(), official: string() }),
+  flags: object({
+    png: string(),
+    svg: string(),
+    alt: optional(string()),
+  }),
+  area: number(),
+  population: number(),
+}
+
+export const CoutriesResults = object({
+  countries: array(
+    object({
+      ...countryContent,
+      region: string(),
+    })
+  ),
 })
 
-export const SingleCountryResults = z.object({
-  country: z.array(z.object({ name: z.object({ common: z.string() }) })),
+export const SingleCountryResults = object({
+  country: array(
+    object({
+      ...countryContent,
+      capital: array(string()),
+      subregion: string(),
+      languages: record(string()),
+      currencies: record(
+        object({
+          name: string(),
+        })
+      ),
+      continents: array(string()),
+      borders: optional(array(string())),
+    })
+  ),
 })
 
 export type Countries = z.infer<typeof CoutriesResults>

@@ -2,8 +2,8 @@ import Image from 'next/image'
 import { Input } from './ui/input'
 const Search = () => {
   return (
-    <div className="flex justify-between items-center w-full mb-10  ">
-      <h1 className="">Found 234 countries</h1>
+    <div className="flex justify-between items-center w-full   mb-10  ">
+      <h1 className="font-semibold ">Found 234 countries</h1>
       <div className="relative">
         <Image
           src="./Search.svg"
@@ -11,6 +11,7 @@ const Search = () => {
           width={20}
           height={20}
           className="absolute top-2.5 left-2"
+          loading="eager"
         />
         <Input
           type="search"

@@ -18,14 +18,13 @@ export default async function Country({ params }: Params) {
   const country = await getCountry(params.name)
 
   return (
-    <div>
-      <h1>
-        {country.map((c) => (
-          <div key={c.name.common} className="text-white">
-            {c.name.common}
-          </div>
-        ))}
-      </h1>
+    <div className="w-full sm:w-[60%] h-auto mx-auto  bg-dark-clr -translate-y-14 sm:rounded-lg rounded-none border-light-black-clr border solid shadow-sm p-8 ">
+      {country.map((c) => (
+        <div key={c.name.common} className="text-white">
+          
+          <h1>{c.name.common}</h1>
+        </div>
+      ))}
     </div>
   )
 }

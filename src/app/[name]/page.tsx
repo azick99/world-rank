@@ -31,6 +31,7 @@ export default async function Country({ params }: Params) {
   // }
 
   return (
+<<<<<<< HEAD
     // <div className="w-full sm:w-[60dvw] h-auto mx-auto  bg-dark-clr -translate-y-14 sm:rounded-lg rounded-none border-light-black-clr border solid shadow-sm pb-8">
     //   <div className="text-light-gray-clr flex flex-col justify-center items-center ">
     //     <Image
@@ -72,5 +73,16 @@ export default async function Country({ params }: Params) {
     //   </div>
     // </div>
     {/* <CountryTable /> */}
+=======
+    <div>
+      <h1>
+        {country.map((c) => (
+          <div key={c.name.common} className="text-white">
+            {c.name.common}
+          </div>
+        ))}
+      </h1>
+    </div>
+>>>>>>> parent of d0fa0d6 (upldates and working with api)
   )
 }

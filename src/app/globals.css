@@ -17,9 +17,6 @@ body {
   @apply bg-dark-clr text-gray-clr font-medium text-base;
 }
 
-h1{
-  @apply text-3xl font-semibold
-}
 @layer base {
   :root {
     --background: 0 0% 100%;

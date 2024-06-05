@@ -6,10 +6,10 @@ export async function GET(
 ) {
   const name = await params.name
   const res = await fetch(`https://restcountries.com/v3.1/name/${name}`)
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
   const country = await res.json()
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d0fa0d6 (upldates and working with api)
   return NextResponse.json({ country })
 }

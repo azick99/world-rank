@@ -15,7 +15,7 @@ const Population = () => {
       <DropdownMenu>
         <DropdownMenuTrigger className="flex justify-between items-center text-light-gray-clr py-2 px-4 border-2 border-gray-clr/40 border-solid rounded-md outline-none">
           <span className="text-sm">Population</span>
-          <Image src="./Expand_down.svg" alt="expand" width={20} height={20} loading='eager'/>
+          <Image src="./Expand_down.svg" alt="expand" width={20} height={20} />
         </DropdownMenuTrigger>
         <DropdownMenuContent side="bottom">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>

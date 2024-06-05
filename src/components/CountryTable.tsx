@@ -1,11 +1,9 @@
-import { Suspense } from 'react'
-import Image from 'next/image'
-import { getCountries } from '@/lib/getCountries'
-import Link from 'next/link'
+import React from 'react'
 
-export default async function CountryTable() {
-  const country = await getCountries()
+const CountryTable = () => {
+
   return (
+<<<<<<< HEAD
     <div className="basis-3/4">
       <div className="w-full grid grid-cols-9 grid-rows-2 gap-8 ">
         <div className="text-xs lg:col-span-1 col-span-2">Flag</div>
@@ -51,5 +49,10 @@ export default async function CountryTable() {
         </Suspense>
       </div>
     </div>
+=======
+    <div className='basis-3/4'>CountryTable</div>
+>>>>>>> parent of d0fa0d6 (upldates and working with api)
   )
 }
+
+export default CountryTable

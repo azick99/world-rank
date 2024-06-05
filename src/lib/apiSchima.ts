@@ -38,5 +38,5 @@ export const SingleCountryResults = object({
     })
   ),
 })
-
+export type SingleCountry = z.infer<typeof SingleCountryResults>
 export type Countries = z.infer<typeof CoutriesResults>

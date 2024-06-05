@@ -4,7 +4,7 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { name: string } }
 ) {
-  const name = params.name
+  const name = await params.name
   const res = await fetch(`https://restcountries.com/v3.1/name/${name}`)
   if (!res.ok) {
     throw new Error('Failed to fetch data')

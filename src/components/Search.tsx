@@ -3,7 +3,7 @@ import { Input } from './ui/input'
 const Search = () => {
   return (
     <div className="flex justify-between items-center w-full   mb-10  ">
-      <h1 className="font-semibold ">Found 234 countries</h1>
+      <span className="font-semibold ">Found 234 countries</span>
       <div className="relative">
         <Image
           src="./Search.svg"

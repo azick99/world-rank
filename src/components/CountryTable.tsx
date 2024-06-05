@@ -18,10 +18,10 @@ export default async function CountryTable() {
       <div className={`w-full grid grid-rows-${country.length} gap-y-8 mt-3 `}>
         <Suspense fallback={<div>Loading...</div>}>
           {country.map((country) => {
-            const { flags, population, area, region, name } = country
+            const { flags, population, area, region, name, cca3 } = country
             return (
               <Link
-                key={name.common}
+                key={cca3}
                 href={`/${name.common}`}
                 className="grid grid-cols-9 items-center gap-8 "
               >

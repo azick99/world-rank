@@ -10,6 +10,6 @@ export async function GET(
     throw new Error('Failed to fetch data')
   }
   const country = await res.json()
-  
+
   return NextResponse.json({ country })
 }

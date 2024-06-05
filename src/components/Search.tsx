@@ -6,8 +6,13 @@ export default async function Search() {
 
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div className="flex justify-between items-center w-full   mb-10  ">
       <span className="font-semibold ">Found {countries.length} countries</span>
+=======
+    <div className="flex justify-between items-center w-full mb-10  ">
+      <h1 className="">Found 234 countries</h1>
+>>>>>>> parent of d0fa0d6 (upldates and working with api)
 =======
     <div className="flex justify-between items-center w-full mb-10  ">
       <h1 className="">Found 234 countries</h1>
@@ -19,6 +24,14 @@ export default async function Search() {
           width={20}
           height={20}
           className="absolute top-2.5 left-2"
+<<<<<<< HEAD
+=======
+        />
+        <Input
+          type="search"
+          placeholder="Search by Name, Region, Subregion"
+          className="border border-transparent bg-gray-clr/30 placeholder:text-gray-clr w-80 pl-10 focus:border focus:border-light-gray-clr focus:border-solid "
+>>>>>>> parent of d0fa0d6 (upldates and working with api)
         />
         <InputField />
       </div>

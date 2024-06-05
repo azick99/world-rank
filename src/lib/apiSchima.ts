@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const countryContent = {
   name: object({ common: string(), official: string() }),
   cca3: string(),
@@ -20,6 +21,10 @@ export const CoutriesResults = object({
       region: string(),
     })
   ),
+=======
+export const CoutriesResults = z.object({
+  countries: z.array(z.object({ name: z.object({ common: z.string() }) })),
+>>>>>>> parent of d0fa0d6 (upldates and working with api)
 =======
 export const CoutriesResults = z.object({
   countries: z.array(z.object({ name: z.object({ common: z.string() }) })),

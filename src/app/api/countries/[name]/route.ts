@@ -8,7 +8,10 @@ export async function GET(
   const res = await fetch(`https://restcountries.com/v3.1/name/${name}`)
   const country = await res.json()
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d0fa0d6 (upldates and working with api)
 =======
 >>>>>>> parent of d0fa0d6 (upldates and working with api)
   return NextResponse.json({ country })

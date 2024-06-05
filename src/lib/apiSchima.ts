@@ -4,7 +4,6 @@ import { z } from 'zod'
 <<<<<<< HEAD
 const countryContent = {
   name: object({ common: string(), official: string() }),
-  cca3: string(),
   flags: object({
     png: string(),
     svg: string(),

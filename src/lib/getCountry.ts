@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { SingleCountryResults } from "./apiSchima"
 
 export async function getCountry(name: string) {
@@ -8,3 +9,16 @@ export async function getCountry(name: string) {
     return parsedData.country
   }
   
+=======
+import { SingleCountryResults } from './apiSchima'
+
+export async function getCountry(name: string) {
+  const res = await fetch(`http://localhost:3000/api/countries/${name}`)
+
+  const data = await res.json()
+
+  const parsedData = SingleCountryResults.parse(data) 
+
+  return parsedData.country
+}
+>>>>>>> parent of 0f880a3 (bit changes)

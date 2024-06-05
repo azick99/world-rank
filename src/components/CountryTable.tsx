@@ -17,10 +17,10 @@ const CountryTable = () => {
       <div className={`w-full grid grid-rows-${country.length} gap-y-8 mt-3 `}>
         <Suspense fallback={<div>Loading...</div>}>
           {country.map((country) => {
-            const { flags, population, area, region, name, cca3 } = country
+            const { flags, population, area, region, name } = country
             return (
               <Link
-                key={cca3}
+                key={name.common}
                 href={`/${name.common}`}
                 className="grid grid-cols-9 items-center gap-8 "
               >

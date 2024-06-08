@@ -5,8 +5,9 @@ export async function GET(
   { params }: { params: { name: string } }
 ) {
   const name = await params.name
+  
   const res = await fetch(`https://restcountries.com/v3.1/name/${name}`)
   const country = await res.json()
-
+  
   return NextResponse.json({ country })
 }

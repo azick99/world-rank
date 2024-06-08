@@ -1,9 +1,8 @@
-import { z } from 'zod'
+import { object, string, z, array, optional, number, record } from 'zod'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 const countryContent = {
   name: object({ common: string(), official: string() }),
+  cca3: string(),
   flags: object({
     png: string(),
     svg: string(),
@@ -13,25 +12,32 @@ const countryContent = {
   population: number(),
 }
 
-export const CoutriesResults = object({
+export const CountriesResults = object({
   countries: array(
     object({
       ...countryContent,
       region: string(),
     })
   ),
-=======
-export const CoutriesResults = z.object({
-  countries: z.array(z.object({ name: z.object({ common: z.string() }) })),
->>>>>>> parent of d0fa0d6 (upldates and working with api)
-=======
-export const CoutriesResults = z.object({
-  countries: z.array(z.object({ name: z.object({ common: z.string() }) })),
->>>>>>> parent of d0fa0d6 (upldates and working with api)
 })
 
-export const SingleCountryResults = z.object({
-  country: z.array(z.object({ name: z.object({ common: z.string() }) })),
+export const SingleCountryResults = object({
+  country: array(
+    object({
+      ...countryContent,
+      capital: array(string()),
+      subregion: string(),
+      languages: record(string()),
+      currencies: record(
+        object({
+          name: string(),
+        })
+      ),
+      continents: array(string()),
+      borders: optional(array(string())),
+    })
+  ),
 })
-export type SingleCountry = z.infer<typeof SingleCountryResults>
-export type Countries = z.infer<typeof CoutriesResults>
+
+export type Countries = z.infer<typeof CountriesResults>
+

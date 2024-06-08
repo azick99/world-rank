@@ -1,24 +1,15 @@
-<<<<<<< HEAD
-import { SingleCountryResults } from "./apiSchima"
-
-export async function getCountry(name: string) {
-    const res = await fetch(`http://localhost:3000/api/countries/${name}`)
-    const data = await res.json()
-    const parsedData = SingleCountryResults.parse(data)
-    if (!res.ok) throw new Error('failed to fetch')
-    return parsedData.country
-  }
-  
-=======
+// Assuming this is your existing code
 import { SingleCountryResults } from './apiSchima'
 
 export async function getCountry(name: string) {
-  const res = await fetch(`http://localhost:3000/api/countries/${name}`)
+  try {
+    const res = await fetch(`http://localhost:3000/api/countries/${name}`)
+    const data = await res.json()
+    const parsedData = SingleCountryResults.parse(data)
 
-  const data = await res.json()
-
-  const parsedData = SingleCountryResults.parse(data) 
-
-  return parsedData.country
+    return parsedData.country
+  } catch (error) {
+    console.error(error)
+    return null // Handle the error appropriately in your application
+  }
 }
->>>>>>> parent of 0f880a3 (bit changes)

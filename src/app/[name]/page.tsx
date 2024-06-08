@@ -1,6 +1,7 @@
+import { getCountry } from '@/lib/getCountry'
 import { Metadata } from 'next'
+import Image from 'next/image'
 import React from 'react'
-import { SingleCountry } from '@/lib/apiSchima'
 type Params = { params: { name: string } }
 
 export const generateMetadata = async ({
@@ -14,7 +15,7 @@ export const generateMetadata = async ({
       description: 'Single Country Page',
     }
   return {
-    title: `${name} | World ranking`,
+    title: `${country[0].name.common} | World ranking`,
     description: 'Single Country Page',
   }
 }
@@ -24,13 +25,13 @@ export default async function Country({ params }: Params) {
   if (!country) return <div>Some thing went wrong!</div>
   const { flags, population, area, name, capital, subregion, languages } =
     country[0]
-    
-    let laguagesValue: string = ''
 
-    for (const key in languages) {
-      laguagesValue = languages[key]
-    }
-    
+  let laguagesValue: string = ''
+
+  for (const key in languages) {
+    laguagesValue = languages[key]
+  }
+
   return (
     <div className="w-full sm:w-[60dvw] h-auto mx-auto  bg-dark-clr -translate-y-14 sm:rounded-lg rounded-none border-light-black-clr border solid shadow-sm pb-8">
       <div className="text-light-gray-clr flex flex-col justify-center items-center ">
@@ -72,6 +73,5 @@ export default async function Country({ params }: Params) {
         </div>
       </div>
     </div>
->>>>>>> parent of d0fa0d6 (upldates and working with api)
   )
 }

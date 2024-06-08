@@ -25,6 +25,7 @@ export default function RootLayout({
             className="absolute h-full -z-30"
             layout="fill"
             objectFit="cover"
+            priority={true}
           />
           <Image
             src="/logo.svg"
@@ -32,6 +33,7 @@ export default function RootLayout({
             width={180}
             height={180}
             className="mb-12"
+            loading="eager"
           />
         </div>
         {children}

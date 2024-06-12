@@ -1,6 +1,7 @@
 // Assuming this is your existing code
 import { SingleCountryResults } from './apiSchima'
-import { DATA_URL } from './getCountries'
+
+const DATA_URL = process.env.SOURCE_URL as string
 
 export async function getCountry(name: string) {
   try {

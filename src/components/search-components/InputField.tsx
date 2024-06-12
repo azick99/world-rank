@@ -11,8 +11,10 @@ const InputField = () => {
   useEffect(() => {
     if (!query) {
       router.push('/')
+      
     } else {
       router.push(`/?search=${query}`)
+      router.prefetch(`api/countries?search=${query}`)
     }
   }, [query, router])
 

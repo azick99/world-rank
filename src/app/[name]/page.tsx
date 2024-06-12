@@ -1,7 +1,6 @@
 import { getCountry } from '@/lib/getCountry'
 import { Metadata } from 'next'
 import Image from 'next/image'
-import React from 'react'
 type Params = { params: { name: string } }
 
 export const generateMetadata = async ({
@@ -25,12 +24,6 @@ export default async function Country({ params }: Params) {
   if (!country) return <div>Some thing went wrong!</div>
   const { flags, population, area, name, capital, subregion, languages } =
     country[0]
-
-  let laguagesValue: string = ''
-
-  for (const key in languages) {
-    laguagesValue = languages[key]
-  }
 
   return (
     <div className="w-full sm:w-[60dvw] h-auto mx-auto  bg-dark-clr -translate-y-14 sm:rounded-lg rounded-none border-light-black-clr border solid shadow-sm pb-8">
@@ -69,7 +62,9 @@ export default async function Country({ params }: Params) {
         </div>
         <div className="flex justify-between py-6 px-5">
           <span>Language</span>
-          <span className="text-light-gray-clr">{laguagesValue}</span>
+          <span className="text-light-gray-clr">
+            {Object.values(languages).join(', ')}
+          </span>
         </div>
       </div>
     </div>

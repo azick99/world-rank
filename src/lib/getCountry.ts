@@ -1,9 +1,10 @@
 // Assuming this is your existing code
 import { SingleCountryResults } from './apiSchima'
+import { DATA_URL } from './getCountries'
 
 export async function getCountry(name: string) {
   try {
-    const res = await fetch(`http://localhost:3000/api/countries/${name}`)
+    const res = await fetch(`${DATA_URL}/${name}`)
     const data = await res.json()
     const parsedData = SingleCountryResults.parse(data)
 
@@ -13,3 +14,4 @@ export async function getCountry(name: string) {
     return null // Handle the error appropriately in your application
   }
 }
+

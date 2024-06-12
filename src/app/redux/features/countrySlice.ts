@@ -19,6 +19,7 @@ const countries = createSlice({
     addCount: (state) => {
       state.count += 1
     },
+    
   },
 })
 

@@ -1,8 +1,10 @@
 import { CountriesResults } from './apiSchima'
 
+export const DATA_URL = process.env.SOURCE_URL as string
 export async function getCountries() {
-  const res = await fetch('http://localhost:3000/api/countries')
+  const res = await fetch(DATA_URL)
   const data = await res.json()
+
   const parsedData = CountriesResults.parse(data)
   if (!res.ok) throw new Error('failed to fetch')
   return parsedData

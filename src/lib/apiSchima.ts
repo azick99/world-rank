@@ -1,7 +1,6 @@
 import { object, string, z, array, optional, number, record } from 'zod'
 
 const countryContent = {
-  // search: string(),
   name: object({ common: string(), official: string() }),
   cca3: string(),
   flags: object({

@@ -17,6 +17,7 @@ export const CountriesResults = object({
     object({
       ...countryContent,
       region: string(),
+      subregion: string().optional(),
     })
   ),
 })
@@ -26,8 +27,8 @@ export const SingleCountryResults = object({
     object({
       ...countryContent,
       capital: array(string()),
-      subregion: string(),
       languages: record(string()),
+      subregion: string(),
       currencies: record(
         object({
           name: string(),
@@ -40,4 +41,4 @@ export const SingleCountryResults = object({
 })
 
 export type Countries = z.infer<typeof CountriesResults>
-
+export type Country = z.infer<typeof CountriesResults>['countries']

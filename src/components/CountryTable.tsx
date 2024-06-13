@@ -1,9 +1,10 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Countries } from '@/lib/apiSchima'
+import { Countries, Country } from '@/lib/apiSchima'
 import { Button } from './ui/button'
 import { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 export default function CountryTable({
   countriesResults,
@@ -11,7 +12,22 @@ export default function CountryTable({
   countriesResults: Countries
 }) {
   const [addMore, setAddMore] = useState(10)
-  const countries = countriesResults.countries.slice(0, addMore)
+  const searchParams = useSearchParams()
+  const search = searchParams.get('search')?.toLowerCase() || ''
+
+  const countries: Country = countriesResults.countries
+    .filter((country) => {
+      const searchByName = country.name.common.toLowerCase().includes(search)
+      const searchByRegion = country.region.toLowerCase().includes(search)
+      const searchBySubregion =
+        typeof country.subregion === 'string'
+          ? country.subregion.toLowerCase().includes(search)
+          : ''
+
+      if (!search) return true
+      return searchByName || searchByRegion || searchBySubregion
+    })
+    .slice(0, addMore)
 
   return (
     <div className="basis-3/4">

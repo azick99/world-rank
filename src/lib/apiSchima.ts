@@ -1,4 +1,13 @@
-import { object, string, z, array, optional, number, record } from 'zod'
+import {
+  object,
+  string,
+  z,
+  array,
+  optional,
+  number,
+  record,
+  boolean,
+} from 'zod'
 
 const countryContent = {
   name: object({ common: string(), official: string() }),
@@ -17,7 +26,9 @@ export const CountriesResults = object({
     object({
       ...countryContent,
       region: string(),
-      subregion: string().optional(),
+      subregion: optional(string()),
+      independent: optional(boolean()),
+      unMember: boolean(),
     })
   ),
 })

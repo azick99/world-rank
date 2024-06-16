@@ -1,25 +1,29 @@
-import Image from 'next/image'
+'use client'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useDebounce } from 'use-debounce'
 import { Input } from './ui/input'
-import { Countries } from '@/lib/apiSchima'
-import InputField from './search-components/InputField'
-const Search = ({ countriesResults }: { countriesResults: Countries }) => {
-  const countries = countriesResults.countries
+
+const Search = () => {
+  const router = useRouter()
+  const [text, setText] = useState('')
+  const [query] = useDebounce(text, 500)
+  useEffect(() => {
+    if (!query) {
+      router.push('/')
+    } else {
+      router.push(`/?search=${query}`)
+    }
+  }, [query, router])
 
   return (
-    <div className="flex justify-between items-center w-full   mb-10  ">
-      <span className="font-semibold ">Found {countries.length} countries</span>
-      <div className="relative">
-        <Image
-          src="./Search.svg"
-          alt="search"
-          width={20}
-          height={20}
-          className="absolute top-2.5 left-2"
-          loading="eager"
-        />
-        <InputField />
-      </div>
-    </div>
+    <Input
+      type="search"
+      value={text}
+      onChange={(e) => setText(e.target.value)}
+      placeholder="Search by Name, Region, Subregion"
+      className="border border-transparent bg-gray-clr/30 placeholder:text-gray-clr w-80 pl-10 focus:border focus:border-light-gray-clr focus:border-solid "
+    />
   )
 }
 

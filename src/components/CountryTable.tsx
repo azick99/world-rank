@@ -1,10 +1,10 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Countries, Country } from '@/lib/apiSchima'
+import { Countries } from '@/lib/apiSchima'
 import { Button } from './ui/button'
 import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useCountries } from '@/lib/costumHooks'
 
 export default function CountryTable({
   countriesResults,
@@ -12,22 +12,7 @@ export default function CountryTable({
   countriesResults: Countries
 }) {
   const [addMore, setAddMore] = useState(10)
-  const searchParams = useSearchParams()
-  const search = searchParams.get('search')?.toLowerCase() || ''
-
-  const countries: Country = countriesResults.countries
-    .filter((country) => {
-      const searchByName = country.name.common.toLowerCase().includes(search)
-      const searchByRegion = country.region.toLowerCase().includes(search)
-      const searchBySubregion =
-        typeof country.subregion === 'string'
-          ? country.subregion.toLowerCase().includes(search)
-          : ''
-
-      if (!search) return true
-      return searchByName || searchByRegion || searchBySubregion
-    })
-    .slice(0, addMore)
+  const countries = useCountries(countriesResults, addMore)
 
   return (
     <div className="basis-3/4">
@@ -40,39 +25,41 @@ export default function CountryTable({
         <div className="rounded  h-[1px] bg-gray-clr/40 col-span-9" />
       </div>
       <div
-        className={`w-full grid grid-rows-${countries.length} gap-y-8 mt-3 `}
+        className={`w-full grid grid-rows-${countries?.length} gap-y-8 mt-3 `}
       >
-        {countries.map((country) => {
-          const { flags, population, area, region, name, cca3 } = country
-          return (
-            <Link
-              key={cca3}
-              href={`/${name.common}`}
-              className="grid grid-cols-9 items-center gap-8 "
-            >
-              <Image
-                src={flags.svg}
-                alt={flags.alt || 'country flag'}
-                width={80}
-                height={90}
-                loading="eager"
-                className="rounded object-cover lg:col-span-1 col-span-2"
-              />
-              <div className="col-span-2 text-light-gray-clr text-base   ">
-                {name.common}
-              </div>
-              <div className="col-span-2 text-light-gray-clr text-base ">
-                {population}
-              </div>
-              <div className="col-span-2 text-light-gray-clr text-base ">
-                {area}
-              </div>
-              <div className="col-span-2 text-light-gray-clr text-base lg:block hidden">
-                {region}
-              </div>
-            </Link>
-          )
-        })}
+        {countries?.length === 0
+          ? 'No countries were Found'
+          : countries?.map((country) => {
+              const { flags, population, area, region, name, cca3 } = country
+              return (
+                <Link
+                  key={cca3}
+                  href={`/${name.common}`}
+                  className="grid grid-cols-9 items-center gap-8 "
+                >
+                  <Image
+                    src={flags.svg}
+                    alt={flags.alt || 'country flag'}
+                    width={80}
+                    height={90}
+                    loading="eager"
+                    className="rounded object-cover lg:col-span-1 col-span-2"
+                  />
+                  <div className="col-span-2 text-light-gray-clr text-base   ">
+                    {name.common}
+                  </div>
+                  <div className="col-span-2 text-light-gray-clr text-base ">
+                    {population}
+                  </div>
+                  <div className="col-span-2 text-light-gray-clr text-base ">
+                    {area}
+                  </div>
+                  <div className="col-span-2 text-light-gray-clr text-base lg:block hidden">
+                    {region}
+                  </div>
+                </Link>
+              )
+            })}
       </div>
       <div className="w-full p-4 flex justify-center">
         <Button

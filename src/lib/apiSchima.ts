@@ -19,6 +19,7 @@ const countryContent = {
   }),
   area: number(),
   population: number(),
+  subregion: optional(string()),
 }
 
 export const CountriesResults = object({
@@ -26,7 +27,7 @@ export const CountriesResults = object({
     object({
       ...countryContent,
       region: string(),
-      subregion: optional(string()),
+
       independent: optional(boolean()),
       unMember: boolean(),
     })
@@ -37,9 +38,8 @@ export const SingleCountryResults = object({
   country: array(
     object({
       ...countryContent,
-      capital: array(string()),
+      capital: array(string()).optional(),
       languages: record(string()),
-      subregion: string(),
       currencies: record(
         object({
           name: string(),

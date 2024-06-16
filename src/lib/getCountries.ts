@@ -1,4 +1,4 @@
-import { Countries, CountriesResults, Country } from './apiSchima'
+import { CountriesResults } from './apiSchima'
 
 const DATA_URL = process.env.SOURCE_URL as string
 export async function getCountries() {

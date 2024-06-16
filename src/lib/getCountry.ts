@@ -12,7 +12,6 @@ export async function getCountry(name: string) {
     return parsedData.country
   } catch (error) {
     console.error(error)
-    return null // Handle the error appropriately in your application
+    // Handle the error appropriately in your application
   }
 }
-

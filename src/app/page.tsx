@@ -3,6 +3,7 @@ import Filters from '@/components/Filters'
 import Search from '@/components/Search'
 import { getCountries } from '@/lib/getCountries'
 import Image from 'next/image'
+import ReduxProvider from './redux/provider'
 
 export default async function Home() {
   const countriesResults = await getCountries()
@@ -26,8 +27,10 @@ export default async function Home() {
           </div>
         </div>
         <div className="flex sm:flex-row flex-col w-full gap-8">
-          <Filters />
-          <CountryTable countriesResults={countriesResults} />
+          <ReduxProvider>
+            <Filters />
+            <CountryTable countriesResults={countriesResults} />
+          </ReduxProvider>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { Countries } from '@/lib/apiSchima'
 import { Button } from './ui/button'
 import { useState } from 'react'
 import { useCountries } from '@/lib/costumHooks'
+import { useAppSelector } from '@/app/redux/helper/reduxHooks'
 
 export default function CountryTable({
   countriesResults,
@@ -12,7 +13,21 @@ export default function CountryTable({
   countriesResults: Countries
 }) {
   const [addMore, setAddMore] = useState(10)
+  const statusArray = useAppSelector((state) => state.countries.statusArray)
+  // used Costum hooks to simplify the task
   const countries = useCountries(countriesResults, addMore)
+
+  // indpendent or unMember filter
+  const filteredCountries = countries?.filter((country) => {
+    if (statusArray[0].checked === country.independent) {
+      return country
+    }
+
+    if (statusArray[1].checked === country.unMember) {
+      return country
+    }
+  })
+
 
   return (
     <div className="basis-3/4">
@@ -25,11 +40,11 @@ export default function CountryTable({
         <div className="rounded  h-[1px] bg-gray-clr/40 col-span-9" />
       </div>
       <div
-        className={`w-full grid grid-rows-${countries?.length} gap-y-8 mt-3 `}
+        className={`w-full grid grid-rows-${filteredCountries?.length} gap-y-8 mt-3 `}
       >
-        {countries?.length === 0
+        {filteredCountries?.length === 0
           ? 'No countries were Found'
-          : countries?.map((country) => {
+          : filteredCountries?.map((country) => {
               const { flags, population, area, region, name, cca3 } = country
               return (
                 <Link

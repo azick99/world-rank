@@ -2,26 +2,40 @@
 import { Countries } from '@/lib/apiSchima'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type CountriesState = {
+const statusArray = [
+  { id: 'unMember', name: 'Member of the United Nations', checked: false },
+  { id: 'independent', name: 'Independent', checked: true },
+]
+
+type StatusArray = typeof statusArray
+type RootState = {
   countries: Countries[]
-  count: number
+  statusArray: StatusArray
 }
 
-const initialState: CountriesState = {
+const initialState: RootState = {
   countries: [],
-  count: 0,
+  statusArray,
 }
 
 const countries = createSlice({
   name: 'countries',
   initialState,
   reducers: {
-    addCount: (state) => {
-      state.count += 1
+    handleStatusChange: (state, action: PayloadAction<string>) => {
+      const id = action.payload
+
+      state.statusArray = state.statusArray.map((status) => {
+        if (status.id === id) {
+          status.checked = !status.checked
+        }
+        return status
+      })
     },
-    
+
   },
 })
 
-export const { addCount } = countries.actions
+export const { handleStatusChange } = countries.actions
+
 export default countries.reducer

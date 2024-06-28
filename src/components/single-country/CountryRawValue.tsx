@@ -1,6 +1,6 @@
 type CountryRawValueProps = {
   title: string
-  content: string | string[]
+  content?: string | string[]
 }
 
 const CountryRawValue = ({ title, content }: CountryRawValueProps) => {

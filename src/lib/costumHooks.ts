@@ -1,7 +1,5 @@
 import { useSearchParams } from 'next/navigation'
 import { Countries, Country } from './apiSchima'
-import { statusArray } from '@/components/filter-components/Status'
-
 export const useCountries = (
   countriesResults?: Countries,
   addMore?: number

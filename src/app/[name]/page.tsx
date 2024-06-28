@@ -76,7 +76,7 @@ export default async function Country({ params }: Params) {
         </div>
       </div>
       <div className="mt-12 flex flex-col divide-y divide-solid divide-gray-clr/40 text-sm">
-        <CountryRawValue title="Capital" content={capital.join(', ')} />
+        <CountryRawValue title="Capital" content={capital?.join(', ')} />
         <CountryRawValue title="Subregion" content={subregion} />
         <CountryRawValue
           title="Language"

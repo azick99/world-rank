@@ -33,7 +33,6 @@ export default function RootLayout({
             width={180}
             height={180}
             className="mb-12"
-            loading="eager"
           />
         </div>
         {children}

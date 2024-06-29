@@ -47,6 +47,9 @@ export default function CountryTable({
     dispatch(setFoundCountries(filteredByRegionCountries?.length || 0))
   }, [filteredByRegionCountries, dispatch])
 
+  if (!filteredByRegionCountries) {
+    return <div>No countries were Found</div>
+  }
   return (
     <div className="basis-3/4">
       <div className="w-full grid grid-cols-9 grid-rows-2 gap-6 ">

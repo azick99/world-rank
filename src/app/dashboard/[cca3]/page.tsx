@@ -28,7 +28,8 @@ export default async function Country({ params }: Params) {
   const countries = await getCountries()
 
   if (!country) return <div>Some thing went wrong!</div>
-
+  if (!countries) return <div>Some thing went wrong!</div>
+  
   const {
     flags,
     population,

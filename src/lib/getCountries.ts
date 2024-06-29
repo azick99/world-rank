@@ -8,7 +8,7 @@ export async function getCountries() {
     const data: any = await res.json()
     const parsedData = CountriesResults.parse(data)
 
-    return parsedData
+    return  parsedData 
   } catch (error) {
     console.error(error)
   }

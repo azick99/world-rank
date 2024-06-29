@@ -4,7 +4,7 @@ export async function GET() {
     const res = await fetch(DATA_SOURCE_URL, {next:{revalidate:10000}})
     const countries = await res.json()
 
-    return Response.json({ countries })
+    return Response.json({ countries, })
   } catch (error: any) {
     return Response.json({ error: error.message }, { status: 500 })
   }

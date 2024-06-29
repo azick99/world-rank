@@ -12,7 +12,7 @@ import { setFoundCountries } from '@/app/redux/features/countrySlice'
 export default function CountryTable({
   countriesResults,
 }: {
-  countriesResults: Countries
+  countriesResults: Countries | undefined
 }) {
   const [addMore, setAddMore] = useState(10)
   const statusArray = useAppSelector((state) => state.countries.statusArray)

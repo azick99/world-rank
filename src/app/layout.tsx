@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Image from 'next/image' // Import from next/image
+import { Suspense } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,13 +28,16 @@ export default function RootLayout({
             objectFit="cover"
             priority={true}
           />
-          <Image
-            src="/logo.svg"
-            alt="logo"
-            width={180}
-            height={180}
-            className="mb-12"
-          />
+          <Suspense fallback={<div>Loading the logo...</div>}>
+            <Image
+              src="/logo.svg"
+              alt="logo"
+              width={180}
+              height={180}
+              className="mb-12"
+              loading="eager"
+            />
+          </Suspense>
         </div>
         {children}
       </body>

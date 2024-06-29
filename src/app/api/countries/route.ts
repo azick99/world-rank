@@ -1,9 +1,11 @@
-const DATA_SOURCE_URL = 'https://restcountries.com/v3.1/all'
-
 export async function GET() {
-  const countries = await fetch(DATA_SOURCE_URL)
-    .then((res) => res.json())
-    .catch((err) => console.log(err))
+  const DATA_SOURCE_URL = 'https://restcountries.com/v3.1/all'
+  try {
+    const res = await fetch(DATA_SOURCE_URL, {next:{revalidate:10000}})
+    const countries = await res.json()
 
-  return Response.json({ countries })
+    return Response.json({ countries })
+  } catch (error: any) {
+    return Response.json({ error: error.message }, { status: 500 })
+  }
 }

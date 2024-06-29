@@ -1,5 +1,5 @@
 // Assuming this is your existing code
-import { SingleCountryResults } from './apiSchima'
+import { Country, SingleCountryResults } from './apiSchima'
 
 const DATA_URL = process.env.SOURCE_URL as string
 

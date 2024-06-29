@@ -1,7 +1,7 @@
 export async function GET() {
   const DATA_SOURCE_URL = 'https://restcountries.com/v3.1/all'
   try {
-    const res = await fetch(DATA_SOURCE_URL, {next:{revalidate:10000}})
+    const res = await fetch(DATA_SOURCE_URL)
     const countries = await res.json()
 
     return Response.json({ countries })

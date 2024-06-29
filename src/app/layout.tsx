@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Image from 'next/legacy/image'
+import Image from 'next/image' // Import from next/image
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,7 +23,7 @@ export default function RootLayout({
             src="/hero-image-wr.jpg"
             alt="logo"
             className="absolute h-full -z-30"
-            layout="fill"
+            fill // Use `fill` instead of `layout="fill"`
             objectFit="cover"
             priority={true}
           />

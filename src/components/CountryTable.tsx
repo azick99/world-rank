@@ -4,10 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Countries } from '@/lib/apiSchima'
 import { Button } from './ui/button'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useCountries } from '@/lib/costumHooks'
-import { useAppDispatch, useAppSelector } from '@/app/redux/helper/reduxHooks'
-import { setFoundCountries } from '@/app/redux/features/countrySlice'
 
 export default function CountryTable({
   countriesResults,
@@ -15,39 +13,10 @@ export default function CountryTable({
   countriesResults: Countries | undefined
 }) {
   const [addMore, setAddMore] = useState(10)
-  const statusArray = useAppSelector((state) => state.countries.statusArray)
-  const regions = useAppSelector((state) => state.countries.regions)
-  // used Costum hooks to simplify the task
+  // used Costum hooks to handle main functionality
   const countries = useCountries(countriesResults)
-  const dispatch = useAppDispatch()
-  // indpendent or unMember filter
-  // Filter countries based on statusArray
-  const filteredByStatusCountries = countries?.filter((country) => {
-    // Combine checks for independent and unMember using logical OR
-    return (
-      statusArray.find((status) => status.checked === country.independent) ||
-      statusArray.find((status) => status.checked === country.unMember)
-    )
-  })
-
-  // Filter countries based on regions
-  const filteredByRegionCountries = filteredByStatusCountries?.filter(
-    (country) => {
-      return regions.some((region) => {
-        if (region === country.region) {
-          return true
-        }
-
-        return false
-      })
-    }
-  )
-
-  useEffect(() => {
-    dispatch(setFoundCountries(filteredByRegionCountries?.length || 0))
-  }, [filteredByRegionCountries, dispatch])
-
-  if (!filteredByRegionCountries) {
+  
+  if (!countries) {
     return <div>No countries were Found</div>
   }
   return (
@@ -61,11 +30,11 @@ export default function CountryTable({
         <div className="rounded  h-[1px] bg-gray-clr/40 col-span-9" />
       </div>
       <div
-        className={`w-full grid grid-rows-${filteredByRegionCountries?.length} gap-y-8 mt-3 `}
+        className={`w-full grid grid-rows-${countries?.length} gap-y-8 mt-3 `}
       >
-        {filteredByRegionCountries?.length === 0
+        {countries?.length === 0
           ? 'No countries were Found'
-          : filteredByRegionCountries?.slice(0, addMore).map((country) => {
+          : countries?.slice(0, addMore).map((country) => {
               const { flags, population, area, region, name, cca3 } = country
               return (
                 <Link

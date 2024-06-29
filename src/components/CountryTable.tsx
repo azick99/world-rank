@@ -44,7 +44,7 @@ export default function CountryTable({
   )
 
   useEffect(() => {
-    dispatch(setFoundCountries(filteredByRegionCountries?.length))
+    dispatch(setFoundCountries(filteredByRegionCountries?.length || 0))
   }, [filteredByRegionCountries, dispatch])
 
   return (

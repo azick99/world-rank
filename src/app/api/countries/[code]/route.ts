@@ -1,15 +1,13 @@
+const DATA_SOURCE_URL = 'https://restcountries.com/v3.1/alpha'
+
 export async function GET(
   request: Request,
   { params }: { params: { code: string } }
 ) {
-  const DATA_SOURCE_URL = 'https://restcountries.com/v3.1/alpha'
-
   const code = params.code
-  try {
-    const res = await fetch(`${DATA_SOURCE_URL}/${code}`)
-    const country = await res.json()
-    return Response.json({ country })
-  } catch (error: any) {
-    return Response.json({ error: error.message }, { status: 500 })
-  }
+  const country = await fetch(`${DATA_SOURCE_URL}/${code}`)
+    .then((res) => res.json())
+    .catch((err) => console.log(err))
+
+  return Response.json({ country })
 }

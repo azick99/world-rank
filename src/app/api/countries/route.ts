@@ -1,11 +1,9 @@
-export async function GET() {
-  const DATA_SOURCE_URL = 'https://restcountries.com/v3.1/all'
-  try {
-    const res = await fetch(DATA_SOURCE_URL)
-    const countries = await res.json()
+const DATA_SOURCE_URL = 'https://restcountries.com/v3.1/all'
 
-    return Response.json({ countries })
-  } catch (error: any) {
-    return Response.json({ error: error.message }, { status: 500 })
-  }
+export async function GET() {
+  const countries = await fetch(DATA_SOURCE_URL)
+    .then((res) => res.json())
+    .catch((err) => console.log(err))
+
+  return Response.json({ countries })
 }

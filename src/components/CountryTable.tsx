@@ -70,7 +70,7 @@ export default function CountryTable({
               return (
                 <Link
                   key={cca3}
-                  href={`/dashboard/${cca3}`}
+                  href={`/${cca3}`}
                   className="grid grid-cols-9 items-center sm:gap-5 gap-8 "
                 >
                   <div className="relative lg:col-span-1 col-span-2 w-16 h-12 ">

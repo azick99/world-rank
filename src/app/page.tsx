@@ -3,6 +3,7 @@ import Filters from '@/components/Filters'
 import Search from '@/components/Search'
 import { getCountries } from '@/lib/getCountries'
 import ReduxProvider from './redux/provider'
+import { Suspense } from 'react'
 
 export default async function Home() {
   const countriesResults = await getCountries()
@@ -16,7 +17,9 @@ export default async function Home() {
           </div>
           <div className="flex sm:flex-row flex-col w-full gap-8">
             <Filters />
-            <CountryTable countriesResults={countriesResults} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <CountryTable countriesResults={countriesResults} />
+            </Suspense>
           </div>
         </ReduxProvider>
       </div>

@@ -4,6 +4,7 @@ import { getCountry } from '@/lib/getCountry'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+
 type Params = { params: { cca3: string } }
 
 export const generateMetadata = async ({
@@ -43,7 +44,7 @@ export default async function Country({ params }: Params) {
 
   const currency = Object.values(currencies)[0].name
 
-  const neighbouringCountries = countries.countries.filter((country) => {
+  const neighbouringCountries = countries?.countries.filter((country) => {
     return borders?.includes(country.cca3)
   })
 
@@ -92,12 +93,12 @@ export default async function Country({ params }: Params) {
         <div className="flex flex-col py-6 px-5 gap-5">
           <span>Neighbouring Countries</span>
           <div className="flex gap-5 flex-wrap">
-            {neighbouringCountries.length === 0 ? (
+            {neighbouringCountries?.length === 0 ? (
               <span className="text-light-gray-clr text-lg">
                 Located in ocean, no neighoburing countries
               </span>
             ) : (
-              neighbouringCountries.map((country) => (
+              neighbouringCountries?.map((country) => (
                 <Link href={`/${country.cca3}`} key={country.cca3}>
                   <figure className="flex flex-col gap-2">
                     <div className="w-24 h-[70px]  relative">

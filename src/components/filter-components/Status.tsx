@@ -15,7 +15,7 @@ const Status = () => {
           <div className="flex gap-2 items-center" key={status.id}>
             <Checkbox
               id={status.id}
-              className="border-gray-clr border-2 w-5 h-5 px-[2px] rounded data-[state=checked]:bg-light-blue-clr data-[state=checked]:border-light-blue-clr"
+              className="border-gray-clr border-2 w-5 h-5 rounded data-[state=checked]:bg-light-blue-clr data-[state=checked]:border-light-blue-clr"
               checked={status.checked}
               onCheckedChange={() => dispatch(handleStatusChange(status.id))}
             />

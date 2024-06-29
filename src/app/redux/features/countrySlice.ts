@@ -6,16 +6,18 @@ const statusArray = [
   { id: 'unMember', name: 'Member of the United Nations', checked: false },
   { id: 'independent', name: 'Independent', checked: true },
 ]
+const regions: string[] = ['Americas', 'Asia', 'Europe', 'Africa']
 
-type StatusArray = typeof statusArray
 type RootState = {
-  countries: Countries[]
-  statusArray: StatusArray
+  foundCountries: number | undefined
+  statusArray: typeof statusArray
+  regions: string[]
 }
 
 const initialState: RootState = {
-  countries: [],
+  foundCountries: 0,
   statusArray,
+  regions,
 }
 
 const countries = createSlice({
@@ -32,10 +34,28 @@ const countries = createSlice({
         return status
       })
     },
+    handleRegionChange: (state, action: PayloadAction<string>) => {
+      const name = action.payload
+      // Check if the region is already in the array
+      if (state.regions.includes(name)) {
+        // Remove the region by filtering it out
+        state.regions = state.regions.filter((region) => region !== name)
+      } else {
+        // Add the region to the array
+        state.regions.push(name)
+      }
+    },
 
+    setFoundCountries: (state, action: PayloadAction<number>) => {
+      if (action.payload) {
+        state.foundCountries = action.payload
+      }
+      return state
+    },
   },
 })
 
-export const { handleStatusChange } = countries.actions
+export const { handleStatusChange, handleRegionChange, setFoundCountries } =
+  countries.actions
 
 export default countries.reducer

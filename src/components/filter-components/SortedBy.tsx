@@ -24,7 +24,7 @@ const SrotedBy = () => {
 
   return (
     <FilterComponentsWrap title="Sorted by">
-      <Select defaultValue="population" value={value} onValueChange={setValue}>
+      <Select value={value} onValueChange={setValue}>
         <SelectTrigger className="flex justify-between items-center bg-dark-clr text-light-gray-clr py-2 px-4 border-gray-clr/40 border-2 border-solid rounded-md ">
           <SelectValue placeholder="population" />
         </SelectTrigger>

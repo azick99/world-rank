@@ -1,8 +1,8 @@
 'use client'
-import { Country } from '@/lib/apiSchima'
+import { useAppDispatch, useAppSelector } from '@/app/redux/helper/reduxHooks'
 import { Button } from '../ui/button'
 import FilterComponentsWrap from './FilterComponentsWrap'
-import { useState } from 'react'
+import { handleRegionChange } from '@/app/redux/features/countrySlice'
 
 const regionsArray = [
   'Americas',
@@ -12,20 +12,20 @@ const regionsArray = [
   'Europe',
   'Oceania',
 ]
-
 const Region = () => {
-  const [regions, setRegions] = useState(regionsArray)
-  
+  const regions = useAppSelector((state) => state.countries.regions)
+  const dispatch = useAppDispatch()
   return (
     <FilterComponentsWrap title="Region">
       <div className="flex flex-wrap gap-4 text-sm">
-        {regions.map((region) => (
+        {regionsArray.map((region) => (
           <Button
-            className={`${
-              region === 'Antarctic' || region === 'Oceania'
-                ? 'text-gray-clr bg-transparent '
-                : 'text-light-gray-clr bg-gray-clr/10'
-            } `}
+            onClick={() => dispatch(handleRegionChange(region))}
+            className={
+              regions.includes(region)
+                ? 'text-light-gray-clr bg-gray-clr/10 '
+                : 'text-gray-clr bg-transparent hover:bg-transparent'
+            }
             key={region}
           >
             {region}

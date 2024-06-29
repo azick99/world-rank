@@ -1,29 +1,28 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useDebounce } from 'use-debounce'
-import { Input } from './ui/input'
+import Image from 'next/image'
+import React from 'react'
+import SearchInput from './search-components/SearchInput'
+import { useAppSelector } from '@/app/redux/helper/reduxHooks'
 
 const Search = () => {
-  const router = useRouter()
-  const [text, setText] = useState('')
-  const [query] = useDebounce(text, 500)
-  useEffect(() => {
-    if (!query) {
-      router.push('/')
-    } else {
-      router.push(`/?search=${query}`)
-    }
-  }, [query, router])
-
+  const foundCountries = useAppSelector(
+    (state) => state.countries.foundCountries
+  )
   return (
-    <Input
-      type="search"
-      value={text}
-      onChange={(e) => setText(e.target.value)}
-      placeholder="Search by Name, Region, Subregion"
-      className="border border-transparent bg-gray-clr/30 placeholder:text-gray-clr w-80 pl-10 focus:border focus:border-light-gray-clr focus:border-solid "
-    />
+    <>
+      <span className="font-semibold ">Found {foundCountries} countries</span>
+      <div className="relative">
+        <Image
+          src="./Search.svg"
+          alt="search"
+          width={20}
+          height={20}
+          className="absolute top-2.5 left-2"
+          loading="eager"
+        />
+        <SearchInput />
+      </div>
+    </>
   )
 }
 

@@ -3,9 +3,9 @@ import { SingleCountryResults } from './apiSchima'
 
 const DATA_URL = process.env.SOURCE_URL as string
 
-export async function getCountry(name: string) {
+export async function getCountry(code: string) {
   try {
-    const res = await fetch(`${DATA_URL}/${name}`)
+    const res = await fetch(`${DATA_URL}/${code}`)
     const data = await res.json()
     const parsedData = SingleCountryResults.parse(data)
 

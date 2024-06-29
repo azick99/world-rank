@@ -4,12 +4,12 @@ import { getCountry } from '@/lib/getCountry'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-type Params = { params: { name: string } }
+type Params = { params: { cca3: string } }
 
 export const generateMetadata = async ({
-  params: { name },
+  params: { cca3 },
 }: Params): Promise<Metadata> => {
-  const country = await getCountry(name)
+  const country = await getCountry(cca3)
 
   if (!country)
     return {
@@ -23,7 +23,7 @@ export const generateMetadata = async ({
 }
 
 export default async function Country({ params }: Params) {
-  const country = await getCountry(params.name)
+  const country = await getCountry(params.cca3)
   const countries = await getCountries()
 
   if (!country) return <div>Some thing went wrong!</div>
@@ -50,19 +50,23 @@ export default async function Country({ params }: Params) {
   return (
     <div className="w-full sm:w-[60dvw] h-auto mx-auto  bg-dark-clr -translate-y-14 sm:rounded-lg rounded-none border-light-black-clr border solid shadow-sm pb-8">
       <div className="text-light-gray-clr flex flex-col justify-center items-center ">
-        <Link href="/" className="flex flex-col justify-center items-center">
-          <Image
-            src={flags.svg}
-            alt={flags.alt || 'country flag'}
-            width={240}
-            height={240}
-            loading="eager"
-            className="rounded-md object-cover -translate-y-12"
-          />
-          <div className="-translate-y-6 text-center">
-            <h1>{name.common}</h1>
-            <span>{name.official}</span>
-          </div>
+        <Link href="/">
+          <figure className="flex flex-col justify-center items-center">
+            <div className="-translate-y-12 w-[264px] h-48 relative">
+              <Image
+                src={flags.svg}
+                alt={flags.alt || 'country flag'}
+                fill
+                loading="eager"
+                className="rounded-md object-cover"
+              />
+            </div>
+
+            <figcaption className="-translate-y-6 text-center">
+              <h1>{name.common}</h1>
+              <span>{name.official}</span>
+            </figcaption>
+          </figure>
         </Link>
         <div className="flex gap-10">
           <div className="px-5 py-2 bg-gray-clr/20 rounded-lg divide-x divide-solid divide-dark-clr flex items-center">
@@ -89,25 +93,26 @@ export default async function Country({ params }: Params) {
           <span>Neighbouring Countries</span>
           <div className="flex gap-5 flex-wrap">
             {neighbouringCountries.length === 0 ? (
-              <span className='text-light-gray-clr text-lg'>Located in ocean, no neighoburing countries</span>
+              <span className="text-light-gray-clr text-lg">
+                Located in ocean, no neighoburing countries
+              </span>
             ) : (
               neighbouringCountries.map((country) => (
-                <Link
-                  href={`/${country.name.common}`}
-                  className="flex flex-col gap-3"
-                  key={country.cca3}
-                >
-                  <Image
-                    src={country.flags.svg}
-                    alt={country.flags.alt || 'country flag'}
-                    width={100}
-                    height={100}
-                    loading="eager"
-                    className="rounded object-cover"
-                  />
-                  <span className="text-light-gray-clr">
-                    {country.name.common}
-                  </span>
+                <Link href={`/${country.cca3}`} key={country.cca3}>
+                  <figure className="flex flex-col gap-2">
+                    <div className="w-24 h-[70px]  relative">
+                      <Image
+                        src={country.flags.svg}
+                        alt={country.flags.alt || 'country flag'}
+                        fill
+                        loading="eager"
+                        className="rounded object-cover"
+                      />
+                    </div>
+                    <figcaption className="text-light-gray-clr">
+                      {country.name.common}
+                    </figcaption>
+                  </figure>
                 </Link>
               ))
             )}

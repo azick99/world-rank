@@ -1,16 +1,16 @@
 import { useSearchParams } from 'next/navigation'
 import { Countries, Country } from './apiSchima'
 export const useCountries = (
-  countriesResults?: Countries,
-  addMore?: number
+  countriesResults?: Countries
+  // addMore?: number
 ) => {
   const searchParams = useSearchParams()
   const search = searchParams.get('search')?.toLowerCase() || ''
   const sortedBy = searchParams.get('sortedBy')
 
   // Sort the list of countries based on the sortedBy parameter
-  let countries: Country | undefined = countriesResults?.countries
-    ?.sort((a, b) => {
+  let countries: Country | undefined = countriesResults?.countries?.sort(
+    (a, b) => {
       switch (sortedBy) {
         case 'name':
           return a.name.common.localeCompare(b.name.common)
@@ -19,8 +19,8 @@ export const useCountries = (
         default:
           return b.population - a.population
       }
-    })
-    .slice(0, addMore)
+    }
+  )
 
   // Filter the list of countries based on the search query
   if (search && countries) {
